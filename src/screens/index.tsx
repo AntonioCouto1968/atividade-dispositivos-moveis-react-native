@@ -42,7 +42,6 @@ export function Home({ appState, dispatch }: Props) {
 const styles = StyleSheet.create({
   container: {
     padding: "2%",
-    backgroundColor: "#fff",
     justifyContent: "space-between",
   },
 });
