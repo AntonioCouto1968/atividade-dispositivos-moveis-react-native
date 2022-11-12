@@ -1,29 +1,39 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { StyleSheet, View, Button } from "react-native";
 import { TextInput } from "react-native-paper";
 
-import { ListaItems } from "@Components/listaItems";
-
+import { ListaTarefas } from "@Components/listaItems";
+import {
+  makeInitialTarefaState,
+  tarefaReducer,
+} from "../reducers/tarefa";
 
 export default function Home() {
-  const [lista, setLista] = useState<string[]>([]);
-  const [state, setState] = useState("");
+  const [homeState, homeDispatch] = useReducer(
+    tarefaReducer,
+    makeInitialTarefaState()
+  );
 
   return (
     <View style={styles.container}>
       <TextInput
         placeholder=""
-        value={state}
-        onChangeText={(text) => setState(text)}
+        value={homeState.name}
+        onChangeText={(text) =>
+          homeDispatch({ type: "WRITE", payload: { name: text } })
+        }
+        error={homeState.error.length > 0}
+        label={homeState.error.length > 0 ? homeState.error : "Tarefa"}
       />
       <Button
         title="Teste"
+        color={"green"}
         onPress={() => {
-          setLista([...lista, state]);
+          homeDispatch({ type: "ADD", payload: { name } });
         }}
       />
 
-      <ListaItems listaItems={lista} />
+      <ListaTarefas tarefas={homeState.tarefas} dispatch={homeDispatch} />
     </View>
   );
 }
