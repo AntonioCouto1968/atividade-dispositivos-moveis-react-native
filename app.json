@@ -1,11 +1,12 @@
 {
   "expo": {
-    "name": "atv-dispositivos-moveis",
-    "slug": "atv-dispositivos-moveis",
+    "name": "Lembra Mercado",
+    "slug": "lembra-mercado",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "jsEngine": "hermes",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
