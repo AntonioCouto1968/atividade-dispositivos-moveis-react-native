@@ -1,39 +1,40 @@
-import { useReducer } from "react";
-import { StyleSheet, View, Button } from "react-native";
-import { TextInput } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 
-import { ListaTarefas } from "@Components/listaItems";
+import { ListaTarefas } from "@Components/tarefaLista";
+import { AddItem } from "@Components/addItem";
 import {
-  makeInitialTarefaState,
-  tarefaReducer,
-} from "../reducers/tarefa";
+  TarefaActions,
+  TarefaActionsEnum,
+  TarefasState,
+} from "../reducers/tarefa/types";
 
-export default function Home() {
-  const [homeState, homeDispatch] = useReducer(
-    tarefaReducer,
-    makeInitialTarefaState()
-  );
+interface Props {
+  appState: TarefasState;
+  dispatch: (action: TarefaActions.All) => void;
+}
+
+export function Home({ appState, dispatch }: Props) {
+  const onTextChange = (name: string) => {
+    dispatch({ type: TarefaActionsEnum.write, payload: { name } });
+  };
+
+  const onAdd = () => {
+    dispatch({ type: TarefaActionsEnum.add, payload: {} });
+  };
 
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder=""
-        value={homeState.name}
-        onChangeText={(text) =>
-          homeDispatch({ type: "WRITE", payload: { name: text } })
-        }
-        error={homeState.error.length > 0}
-        label={homeState.error.length > 0 ? homeState.error : "Tarefa"}
+      <AddItem
+        error={appState.error}
+        name={appState.name}
+        onTextChange={onTextChange}
+        onAdd={onAdd}
       />
-      <Button
-        title="Teste"
-        color={"green"}
-        onPress={() => {
-          homeDispatch({ type: "ADD", payload: { name } });
-        }}
+      <ListaTarefas
+        search={appState.search}
+        tarefas={appState.tarefas}
+        dispatch={dispatch}
       />
-
-      <ListaTarefas tarefas={homeState.tarefas} dispatch={homeDispatch} />
     </View>
   );
 }
@@ -41,7 +42,6 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     padding: "2%",
-    // flex: 1,
     backgroundColor: "#fff",
     justifyContent: "space-between",
   },

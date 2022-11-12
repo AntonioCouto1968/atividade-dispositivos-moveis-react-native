@@ -1,10 +1,22 @@
-import * as React from "react";
 import { Appbar } from "react-native-paper";
 import { expo } from "../../app.json";
+import { TarefaActions, TarefasState } from "../reducers/tarefa/types";
+import { Search } from "./search";
 
-export const MyAppBar = () => (
-  <Appbar.Header>
-    <Appbar.Content title={expo.name} />
-  </Appbar.Header>
-);
+interface Props {
+  appState: TarefasState;
+  dispatch: (action: TarefaActions.All) => void;
+}
 
+export const MyAppBar = ({ appState, dispatch }: Props) => {
+  const onChangeText = (search: string) => {
+    dispatch({ type: "SEARCH", payload: { search } });
+  };
+
+  return (
+    <Appbar.Header>
+      <Appbar.Content title={expo.name} />
+      <Search search={appState.search} onChangeText={onChangeText} />
+    </Appbar.Header>
+  );
+};
