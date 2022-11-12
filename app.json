@@ -1,10 +1,11 @@
 {
   "expo": {
     "name": "Afazeres",
-    "slug": "afazeres",
+    "slug": "trabalho-dispositivos-moveis",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "owner": "foca_de_combate",
     "jsEngine": "hermes",
     "splash": {
       "image": "./assets/splash.png",
@@ -12,22 +13,33 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/35c0f0f7-27d6-4178-86f6-e76b72c65c3f"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "tabalho-dispositivos-moveis"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.foca_de_combate.trabalhodispositivosmoveis"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "35c0f0f7-27d6-4178-86f6-e76b72c65c3f"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

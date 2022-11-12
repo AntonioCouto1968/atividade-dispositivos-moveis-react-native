@@ -15,7 +15,8 @@
     "react-native": "0.70.5",
     "react-native-paper": "^5.0.0-rc.9",
     "ulid": "^2.3.0",
-    "expo-system-ui": "~2.0.1"
+    "expo-system-ui": "~2.0.1",
+    "expo-updates": "~0.15.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
