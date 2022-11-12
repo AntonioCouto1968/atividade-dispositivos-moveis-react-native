@@ -1,29 +1,21 @@
 import { ulid } from "ulid";
-import {
-  Actor,
-  AddTask,
-  RemoveTask,
-  TarefaAction,
-  TarefaActions,
-  TarefasState,
-  ToggleTask,
-  WriteTask,
-} from "./types";
+import { Actor, TarefaActions, TarefaActionsEnum, TarefasState } from "./types";
 
 export const makeInitialTarefaState = (): TarefasState => ({
   tarefas: [],
   error: "",
   name: "",
+  search: "",
 });
 
-export const removeTask: Actor<RemoveTask> = (state, action): TarefasState => {
+export const removeTask: Actor<TarefaActions.Remove> = (state, action) => {
   return {
     ...state,
     tarefas: state.tarefas.filter((tarefa) => tarefa.id !== action.payload.id),
   };
 };
 
-export const toggleTask: Actor<ToggleTask> = (state, action): TarefasState => {
+export const toggleTask: Actor<TarefaActions.Toggle> = (state, action) => {
   return {
     ...state,
     tarefas: state.tarefas.map((t) =>
@@ -32,14 +24,14 @@ export const toggleTask: Actor<ToggleTask> = (state, action): TarefasState => {
   };
 };
 
-export const writeTask: Actor<WriteTask> = (state, action): TarefasState => {
+export const writeTask: Actor<TarefaActions.Write> = (state, action) => {
   return {
     ...state,
     name: action.payload.name,
   };
 };
 
-export const addTask: Actor<AddTask> = (state): TarefasState => {
+export const addTask: Actor<TarefaActions.Add> = (state) => {
   if (state.name === "") {
     return {
       ...state,
@@ -57,6 +49,7 @@ export const addTask: Actor<AddTask> = (state): TarefasState => {
   }
 
   return {
+    ...state,
     tarefas: [
       ...state.tarefas,
       {
@@ -71,22 +64,32 @@ export const addTask: Actor<AddTask> = (state): TarefasState => {
   };
 };
 
+export const searchTask: Actor<TarefaActions.Search> = (state, action) => {
+  return {
+    ...state,
+    search: action.payload.search,
+  };
+};
+
 export const tarefaReducer = (
   state: TarefasState,
-  action: TarefaAction
+  action: TarefaActions.All
 ): TarefasState => {
   switch (action.type) {
-    case TarefaActions.add:
+    case TarefaActionsEnum.add:
       return addTask(state, action);
 
-    case TarefaActions.remove:
+    case TarefaActionsEnum.remove:
       return removeTask(state, action);
 
-    case TarefaActions.toggle:
+    case TarefaActionsEnum.toggle:
       return toggleTask(state, action);
 
-    case TarefaActions.write:
+    case TarefaActionsEnum.write:
       return writeTask(state, action);
+
+    case TarefaActionsEnum.search:
+      return searchTask(state, action);
 
     default:
       return state;
