@@ -2,7 +2,7 @@
   "expo": {
     "name": "A fazeres",
     "slug": "trabalho-dispositivos-moveis",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "owner": "foca_de_combate",
