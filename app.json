@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Afazeres",
+    "name": "A fazeres",
     "slug": "trabalho-dispositivos-moveis",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "owner": "foca_de_combate",
@@ -13,33 +13,19 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/35c0f0f7-27d6-4178-86f6-e76b72c65c3f"
+      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "tabalho-dispositivos-moveis"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.foca_de_combate.trabalhodispositivosmoveis"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "35c0f0f7-27d6-4178-86f6-e76b72c65c3f"
       }
-    },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
     }
   }
 }

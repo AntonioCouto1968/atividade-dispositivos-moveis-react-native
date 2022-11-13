@@ -20,7 +20,7 @@ export const AddItem = ({ error, name, onTextChange, onAdd }: Props) => {
         error={hasError}
         label={hasError ? error : "Tarefa"}
       />
-      <Button title="Adicionar" color={"green"} onPress={() => onAdd()} />
+      <Button title="Adicionar" color={"green"} onPress={onAdd} />
     </>
   );
 };
