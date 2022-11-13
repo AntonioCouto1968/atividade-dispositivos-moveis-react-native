@@ -30,9 +30,11 @@ export const ListaTarefas = ({
     dispatch({ type: "TOGGLE", payload: { id } });
   };
 
+  const hasTasks = tarefas.length > 0;
+
   return (
     <View style={styles.container}>
-      <Text variant="bodyLarge">Items</Text>
+      {!hasTasks && <Text variant="bodyLarge" style={{textAlign: "center", marginTop:'50%'}}>Sem tarefas criadas 😶</Text>}
       {tarefas
         .filter((tarefa) => doSearch(tarefa))
         .map((tarefa) => (
@@ -50,7 +52,7 @@ export const ListaTarefas = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: "2%",
+    // padding: "2%",
     marginTop: "4%",
   },
 });

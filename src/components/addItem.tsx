@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { Button, TextInput as NativeTextInput } from "react-native";
-import { TextInput, HelperText } from "react-native-paper";
+import { TextInput as NativeTextInput } from "react-native";
+import { TextInput, HelperText, Button } from "react-native-paper";
 
 interface Props {
   error: string;
@@ -28,13 +28,16 @@ export const AddItem = ({ error, name, onTextChange, onAdd }: Props) => {
         {error}
       </HelperText>
       <Button
-        title="Adicionar"
-        color={"green"}
+        mode="contained"
+        disabled={name.length === 0 || hasError}
+        style={{ borderRadius: 5 }}
         onPress={() => {
           onAdd();
           inputRef.current?.focus();
         }}
-      />
+      >
+        Adicionar
+      </Button>
     </>
   );
 };
