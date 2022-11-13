@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { TextInput, View } from "react-native";
+import { useState, useRef, useEffect } from "react";
+import { TextInput } from "react-native";
 import { Appbar } from "react-native-paper";
 
 interface Props {
@@ -10,6 +10,18 @@ interface Props {
 export const Search = ({ onChangeText, search }: Props) => {
   const [visible, setVisible] = useState(false);
   const inputRef = useRef<TextInput>(null);
+
+  const toggleSearch = () => setVisible(!visible);
+
+  useEffect(() => {
+    if (visible && inputRef.current) {
+      inputRef.current.focus();
+
+      return;
+    }
+
+    onChangeText("");
+  }, [visible]);
 
   return (
     <>
@@ -25,16 +37,7 @@ export const Search = ({ onChangeText, search }: Props) => {
           onChangeText={onChangeText}
         />
       )}
-      <Appbar.Action
-        icon="magnify"
-        onPress={() => {
-          setVisible(!visible);
-
-          if (inputRef.current && visible) {
-            inputRef.current.focus();
-          }
-        }}
-      />
+      <Appbar.Action icon="magnify" onPress={toggleSearch} />
     </>
   );
 };

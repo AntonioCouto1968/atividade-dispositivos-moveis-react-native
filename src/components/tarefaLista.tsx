@@ -11,9 +11,15 @@ interface Props {
   tarefas: Tarefa[];
   search: string;
   dispatch: (tarefas: TarefaActions.All) => void;
+  goToTarefa: (id: string) => void;
 }
 
-export const ListaTarefas = ({ search, tarefas, dispatch }: Props) => {
+export const ListaTarefas = ({
+  search,
+  tarefas,
+  dispatch,
+  goToTarefa,
+}: Props) => {
   const doSearch = makeSearchByName(search);
 
   const deleteTask = (id: string) => {
@@ -35,6 +41,7 @@ export const ListaTarefas = ({ search, tarefas, dispatch }: Props) => {
             key={tarefa.id}
             onDelete={deleteTask}
             toggleDone={toggleDone}
+            goToTarefa={goToTarefa}
           />
         ))}
     </View>

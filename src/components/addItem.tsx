@@ -1,5 +1,5 @@
 import { Button } from "react-native";
-import { TextInput } from "react-native-paper";
+import { TextInput, HelperText } from "react-native-paper";
 
 interface Props {
   error: string;
@@ -18,8 +18,11 @@ export const AddItem = ({ error, name, onTextChange, onAdd }: Props) => {
         value={name}
         onChangeText={onTextChange}
         error={hasError}
-        label={hasError ? error : "Tarefa"}
+        label="Adicionar tarefa"
       />
+      <HelperText type="error" visible={hasError}>
+        {error}
+      </HelperText>
       <Button title="Adicionar" color={"green"} onPress={onAdd} />
     </>
   );
