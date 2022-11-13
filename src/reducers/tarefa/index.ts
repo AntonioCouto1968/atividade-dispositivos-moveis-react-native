@@ -23,10 +23,22 @@ export const toggleTask: Actor<TarefaActions.Toggle> = (state, action) => {
   };
 };
 
-export const writeTask: Actor<TarefaActions.Write> = (state, action) => {
+export const writeTask: Actor<TarefaActions.Write> = (state, {payload}) => {
+
+  const hasTaskAlready = state.tarefas.some((t) => t.name === payload.name);
+
+  if (hasTaskAlready) {
+    return {
+      ...state,
+      name: payload.name,
+      error: "Nome da tarefa já existe",
+    };
+  }
+
   return {
     ...state,
-    name: action.payload.name,
+    error: "",
+    name: payload.name,
   };
 };
 
@@ -38,13 +50,8 @@ export const addTask: Actor<TarefaActions.Add> = (state) => {
     };
   }
 
-  const hasTaskAlready = state.tarefas.some((t) => t.name === state.name);
-
-  if (hasTaskAlready) {
-    return {
-      ...state,
-      error: "Nome da tarefa já existe",
-    };
+  if (state.error) {
+    return state;
   }
 
   return {
