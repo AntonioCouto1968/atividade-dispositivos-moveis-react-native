@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const TarefaItem = ({ tarefa, onDelete, toggleDone }: Props) => {
-  const shouldStrike = tarefa.done ? "line-through" : "none";
+  const textDecorationLine = tarefa.done ? "line-through" : "none";
 
   return (
     <View style={styles.container}>
@@ -20,7 +20,7 @@ export const TarefaItem = ({ tarefa, onDelete, toggleDone }: Props) => {
 
       <Text
         style={{
-          textDecorationLine: shouldStrike,
+          textDecorationLine,
           flexGrow: 2,
         }}
         variant="bodyMedium"

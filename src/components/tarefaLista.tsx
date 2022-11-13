@@ -27,14 +27,16 @@ export const ListaTarefas = ({ search, tarefas, dispatch }: Props) => {
   return (
     <View style={styles.container}>
       <Text variant="bodyLarge">Items</Text>
-      {tarefas.filter(doSearch).map((tarefa) => (
-        <TarefaItem
-          tarefa={tarefa}
-          key={tarefa.id}
-          onDelete={deleteTask}
-          toggleDone={toggleDone}
-        />
-      ))}
+      {tarefas
+        .filter((tarefa) => doSearch(tarefa))
+        .map((tarefa) => (
+          <TarefaItem
+            tarefa={tarefa}
+            key={tarefa.id}
+            onDelete={deleteTask}
+            toggleDone={toggleDone}
+          />
+        ))}
     </View>
   );
 };

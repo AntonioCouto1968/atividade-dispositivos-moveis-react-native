@@ -1,4 +1,3 @@
-import { ulid } from "ulid";
 import { Actor, TarefaActions, TarefaActionsEnum, TarefasState } from "./types";
 
 export const makeInitialTarefaState = (): TarefasState => ({
@@ -53,7 +52,7 @@ export const addTask: Actor<TarefaActions.Add> = (state) => {
     tarefas: [
       ...state.tarefas,
       {
-        id: ulid(),
+        id: (state.tarefas.length + 1).toString(),
         name: state.name,
         done: false,
         createdAt: new Date(),
