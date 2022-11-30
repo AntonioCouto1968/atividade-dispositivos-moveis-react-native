@@ -25,9 +25,7 @@ export const TarefaItem = ({
       />
 
       <Text
-        style={{
-          flexGrow: 2,
-        }}
+        style={styles.text}
         variant="bodyLarge"
         onPress={() => goToTarefa(tarefa.id)}
       >
@@ -48,4 +46,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     opacity: 1,
   },
+  text: {
+    flexGrow: 2
+  }
 });
