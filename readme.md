@@ -15,3 +15,8 @@
 - [ ] Uma atividade atrasada deve ser adicionado caso a data de entrega seja anterior a data atual.
 
 ![Tarefa](tarefas.png)
+
+
+ATENÇÃO: para rodar tem que executar esse comando no terminal:
+
+"npm install moment --save"

@@ -6,6 +6,7 @@ export const TarefaActionsEnum = {
   remove: "REMOVE",
   toggle: "TOGGLE",
   write: "WRITE",
+  write2: "WRITE2",
   search: "SEARCH",
 } as const;
 
@@ -19,8 +20,10 @@ export type BaseTarefaAction = BaseAction<TarefaActionsKeys>;
 export interface TarefasState {
   tarefas: Tarefa[];
   error: string;
+  error2: string;
   name: string;
   search: string;
+  prazo: string;
 }
 
 export namespace TarefaActions {
@@ -50,6 +53,13 @@ export namespace TarefaActions {
     };
   }
 
+  export interface Write2 {
+    type: TarefaActionsType["write2"];
+    payload: {
+      prazo: string;
+    };
+  }
+
   export interface Search {
     type: TarefaActionsType["search"];
     payload: {
@@ -57,7 +67,7 @@ export namespace TarefaActions {
     };
   }
 
-  export type All = Add | Remove | Toggle | Write | Search;
+  export type All = Add | Remove | Toggle | Write | Write2 | Search;
 }
 
 export type Actor<T extends TarefaActions.All> = (

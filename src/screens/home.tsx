@@ -22,6 +22,10 @@ export function HomePage({ appState, dispatch, navigation }: Props) {
     dispatch({ type: TarefaActionsEnum.write, payload: { name } });
   };
 
+  const onPrazoChange = (prazo: string) => {
+    dispatch({ type: TarefaActionsEnum.write2, payload: { prazo } });
+  };
+
   const onAdd = () => {
     dispatch({ type: TarefaActionsEnum.add, payload: {} });
   };
@@ -36,7 +40,10 @@ export function HomePage({ appState, dispatch, navigation }: Props) {
         error={appState.error}
         name={appState.name}
         onTextChange={onTextChange}
+        onPrazoChange={onPrazoChange}
         onAdd={onAdd}
+        error2={appState.error2}
+        prazo={appState.prazo}
       />
       <ListaTarefas
         search={appState.search}

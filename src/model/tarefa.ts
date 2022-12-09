@@ -3,4 +3,5 @@ export interface Tarefa {
   name: string;
   done: boolean;
   createdAt: Date;
+  deadline: Date;
 }

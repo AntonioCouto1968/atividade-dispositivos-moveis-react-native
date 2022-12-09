@@ -1,5 +1,5 @@
 import { Text, Checkbox, IconButton, Surface } from "react-native-paper";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import { Tarefa } from "../model/tarefa";
 
 interface Props {
@@ -17,6 +17,8 @@ export const TarefaItem = ({
 }: Props) => {
   styles.container.opacity = tarefa.done ? 0.5 : 1;
 
+  const atrasada = (tarefa?.deadline < new Date() && !tarefa?.done);
+
   return (
     <Surface style={styles.container} elevation={1}>
       <Checkbox
@@ -33,6 +35,13 @@ export const TarefaItem = ({
       </Text>
 
       <IconButton icon="delete" onPress={() => onDelete(tarefa.id)} />
+
+      <Text
+        style={styles.text}
+        variant="bodyLarge"
+      >{atrasada? "⏰" : ""}
+      </Text>
+
     </Surface>
   );
 };
@@ -40,7 +49,7 @@ export const TarefaItem = ({
 const styles = StyleSheet.create({
   container: {
     padding: "1%",
-    marginTop: "4%",
+    marginTop: "1%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -48,5 +57,10 @@ const styles = StyleSheet.create({
   },
   text: {
     flexGrow: 2
-  }
+  },
+  image: {
+    borderRadius: 2,
+    height: 15,
+    width: 15,
+  },
 });

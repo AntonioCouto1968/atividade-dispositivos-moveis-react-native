@@ -1,10 +1,15 @@
+import { toDate } from "date-fns";
+import moment, { ISO_8601, now } from "moment";
+// import { isDate } from "date-fns";
 import { Actor, TarefaActions, TarefaActionsEnum, TarefasState } from "./types";
 
 export const makeInitialTarefaState = (): TarefasState => ({
   tarefas: [],
   error: "",
+  error2: "",
   name: "",
   search: "",
+  prazo: "",
 });
 
 export const removeTask: Actor<TarefaActions.Remove> = (state, action) => {
@@ -26,7 +31,7 @@ export const toggleTask: Actor<TarefaActions.Toggle> = (state, action) => {
 export const writeTask: Actor<TarefaActions.Write> = (state, {payload}) => {
 
   const hasTaskAlready = state.tarefas.some((t) => t.name === payload.name);
-
+  
   if (hasTaskAlready) {
     return {
       ...state,
@@ -42,6 +47,26 @@ export const writeTask: Actor<TarefaActions.Write> = (state, {payload}) => {
   };
 };
 
+export const writeTask2: Actor<TarefaActions.Write2> = (state, {payload}) => {
+
+  // const dataInvalida = isDate(payload);
+  const datavalida = (moment(payload.prazo, "DD/MM/YYYY HH:mm", true).isValid());
+  
+  if (!datavalida) {
+    return {
+      ...state,
+      prazo: payload.prazo,
+      error2: "A data não é válida",
+    };
+  }
+
+  return {
+    ...state,
+    error2: "",
+    prazo: payload.prazo,
+  };
+};
+
 export const addTask: Actor<TarefaActions.Add> = (state) => {
   if (state.name === "") {
     return {
@@ -50,9 +75,9 @@ export const addTask: Actor<TarefaActions.Add> = (state) => {
     };
   }
 
-  if (state.error) {
-    return state;
-  }
+  if (state.error || state.error2) {
+     return state;
+   }
 
   return {
     ...state,
@@ -63,10 +88,13 @@ export const addTask: Actor<TarefaActions.Add> = (state) => {
         name: state.name,
         done: false,
         createdAt: new Date(),
+        deadline: new Date(moment(state.prazo, "DD/MM/YYYY HH:mm", true).format("YYYY-MM-DD HH:mm")),
       },
     ],
     error: "",
     name: "",
+    error2: "",
+    prazo: "",
   };
 };
 
@@ -93,6 +121,9 @@ export const tarefaReducer = (
 
     case TarefaActionsEnum.write:
       return writeTask(state, action);
+
+    case TarefaActionsEnum.write2:
+      return writeTask2(state, action);
 
     case TarefaActionsEnum.search:
       return searchTask(state, action);
